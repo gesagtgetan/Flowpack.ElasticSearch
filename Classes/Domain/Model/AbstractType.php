@@ -94,8 +94,6 @@ abstract class AbstractType
      */
     public function request($method, $path = null, array $arguments = [], $content = null)
     {
-        $path = '/' . $this->name . ($path ?: '');
-
         return $this->index->request($method, $path, $arguments, $content);
     }
 

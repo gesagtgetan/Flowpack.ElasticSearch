@@ -19,6 +19,8 @@ use Neos\Utility\Arrays;
  */
 class Mapping
 {
+    const TYPE_PROPERTY_NAME = '_neos_type';
+
     /**
      * @var AbstractType
      */
@@ -50,6 +52,7 @@ class Mapping
     public function __construct(AbstractType $type)
     {
         $this->type = $type;
+        $this->properties[static::TYPE_PROPERTY_NAME] = ['type' => 'keyword'];
     }
 
     /**
@@ -102,12 +105,10 @@ class Mapping
      */
     public function asArray()
     {
-        return [
-            $this->type->getName() => Arrays::arrayMergeRecursiveOverrule([
-                'dynamic_templates' => $this->getDynamicTemplates(),
-                'properties' => $this->getProperties(),
-            ], $this->fullMapping),
-        ];
+        return Arrays::arrayMergeRecursiveOverrule([
+            'dynamic_templates' => $this->getDynamicTemplates(),
+            'properties' => $this->getProperties(),
+        ], $this->fullMapping);
     }
 
     /**

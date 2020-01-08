@@ -161,9 +161,9 @@ class Index
         if ($this->client === null) {
             throw new Exception('The client of the index "' . $this->name . '" is not set, hence no requests can be done.');
         }
-        $path = ($path ? trim($path) : '');
+        $path = ltrim($path ? trim($path) : '', '/');
         if ($prefixIndex === true) {
-            $path = '/' . $this->name . $path;
+            $path = '/' . $this->name . '/' . $path;
         } else {
             $path = '/' . $path;
         }
